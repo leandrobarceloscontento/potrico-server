@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "start": "npx prisma migrate deploy && ts-node ./src/server.ts",
+    "start": "npx prisma migrate deploy && ts-node ./src/server.ts", 
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev --name init",
     "seed": "ts-node prisma/seed.ts"
