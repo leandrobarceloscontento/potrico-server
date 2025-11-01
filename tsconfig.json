@@ -2,21 +2,19 @@
   "compilerOptions": {
     "target": "ES2020",
     "module": "CommonJS",
-    "outDir": "dist",
-    "rootDir": "src", // Revertendo para o valor mais correto
+    "outDir": "./", 
+    "rootDir": "src",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "baseUrl": "." 
+    "baseUrl": ".",
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
-    "src/**/*" // Agora apenas inclui TUDO dentro de src
-    // REMOVENDO "prisma/**/*" daqui
+    "src/**/*",
+    "prisma/**/*"
   ],
   "exclude": [
-    "node_modules",
-    "dist"
-    // Adicione o seed.ts aqui se ele estiver fora de src
-    // "prisma/seed.ts"
+    "node_modules"
   ]
 }
