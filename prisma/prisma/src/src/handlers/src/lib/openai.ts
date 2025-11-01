@@ -6,7 +6,7 @@ const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 // Função para chamadas de texto normais
 export async function callOpenAI(messages: { role: string; content: string }[]) {
   const resp = await client.chat.completions.create({
-    model: "gpt-4o-mini", // Alterado para um modelo mais estável e rápido para texto
+    model: "gpt-4o-mini",
     messages: messages.map(m => ({ role: m.role as "user" | "assistant" | "system", content: m.content })),
     max_tokens: 500,
     temperature: 0.6
@@ -14,10 +14,9 @@ export async function callOpenAI(messages: { role: string; content: string }[]) 
   return resp.choices?.[0]?.message?.content ?? "Desculpa, não consegui responder agora.";
 }
 
-// Transcribe audio file (Whisper or OpenAI audio)
+// Transcribe audio file (Whisper ou OpenAI audio)
 export async function transcribeAudio(filePath: string) {
   const stream = fs.createReadStream(filePath);
-  // O model para áudio deve ser 'whisper-1' (nome real da API)
   const resp = await client.audio.transcriptions.create({
     file: stream,
     model: "whisper-1", 
@@ -25,26 +24,27 @@ export async function transcribeAudio(filePath: string) {
   return resp.text || "";
 }
 
-// Analisa imagem: retorna uma breve descrição (CORRIGIDO TS2769)
+// Analisa imagem: retorna uma breve descrição (Forçando a tipagem para o compilador aceitar)
 export async function analyzeImage(filePath: string) {
   // 1. Ler o arquivo e codificar em Base64
   const imageBase64 = fs.readFileSync(filePath, { encoding: 'base64' });
 
   const resp = await client.chat.completions.create({
-    model: "gpt-4o", // Modelo que suporta visão
+    model: "gpt-4o",
     messages: [
       {
         role: "user",
+        // FORÇA A TIPAGEM 'as any' para contornar o erro TS2769 do compilador
         content: [
           { type: "text", text: "Descreva esta imagem em detalhes." },
           {
             type: "image_url",
             image_url: {
-              url: `data:image/jpeg;base64,${imageBase64}`, // URL é o campo final
+              url: `data:image/jpeg;base64,${imageBase64}`,
             },
           },
-        ],
-      } as any, // Adicionado 'as any' para forçar a tipagem caso o compilador persista
+        ] as any, // <--- O PONTO CRÍTICO PARA O BUILD
+      },
     ],
     max_tokens: 300,
   });
