@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js",
+    // CORREÇÃO FINAL: Força a migração e inicia o servidor com ts-node.
+    "start": "npx prisma migrate deploy && npx ts-node src/server.ts", 
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev --name init",
     "seed": "ts-node prisma/seed.ts"
@@ -16,12 +17,15 @@
     "body-parser": "^1.20.2",
     "express": "^4.18.2",
     "openai": "^4.10.0",
-    "form-data": "^4.0.0"
+    "form-data": "^4.0.0",
+    "ts-node": "^10.9.1"
   },
   "devDependencies": {
     "prisma": "^5.0.0",
-    "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    // CORREÇÃO: Adiciona dependências de tipos para resolver TS7016.
+    "@types/express": "^4.17.21", 
+    "@types/node": "^20.12.12" 
   }
 }
