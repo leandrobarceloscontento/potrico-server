@@ -1,8 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { handleWebhook } from "@handlers/webhook"; // Caminho atualizado usando @handlers
+import { handleWebhook } from "./handlers/webhook"; // Caminho relativo simples
 import { PrismaClient } from "@prisma/client";
-import { sendTextToWhatsApp } from "@lib/whatsapp"; // Caminho atualizado usando @lib
+import { sendTextToWhatsApp } from "./lib/whatsapp"; // Caminho relativo simples
 
 const prisma = new PrismaClient();
 const app = express();
