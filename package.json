@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc",
-    // CORREÇÃO FINAL: Força a migração e inicia o servidor com ts-node.
+    
     "start": "npx prisma migrate deploy && npx ts-node src/server.ts", 
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev --name init",
