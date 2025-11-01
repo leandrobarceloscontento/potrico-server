@@ -2,14 +2,18 @@
   "compilerOptions": {
     "target": "ES2020",
     "module": "CommonJS",
-    "moduleResolution": "Node", 
+    "moduleResolution": "Node",
     "outDir": "./", 
     "rootDir": ".",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "baseUrl": ".",
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@lib/*": ["src/lib/*"],
+      "@handlers/*": ["src/handlers/*"]
+    }
   },
   "include": [
     "src/**/*",
