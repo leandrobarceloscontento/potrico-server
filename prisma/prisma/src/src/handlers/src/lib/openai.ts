@@ -1,13 +1,13 @@
 import OpenAI from "openai";
 import fs from "fs";
-// import FormData from "form-data"; // Removido, pois não é necessário para análise de imagem via Visão
 
 const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
+// Função para chamadas de texto normais
 export async function callOpenAI(messages: { role: string; content: string }[]) {
   const resp = await client.chat.completions.create({
-    model: "gpt-5-mini",
-    messages: messages.map(m => ({ role: m.role as any, content: m.content })),
+    model: "gpt-4o-mini", // Alterado para um modelo mais estável e rápido para texto
+    messages: messages.map(m => ({ role: m.role as "user" | "assistant" | "system", content: m.content })),
     max_tokens: 500,
     temperature: 0.6
   });
@@ -17,20 +17,21 @@ export async function callOpenAI(messages: { role: string; content: string }[]) 
 // Transcribe audio file (Whisper or OpenAI audio)
 export async function transcribeAudio(filePath: string) {
   const stream = fs.createReadStream(filePath);
+  // O model para áudio deve ser 'whisper-1' (nome real da API)
   const resp = await client.audio.transcriptions.create({
     file: stream,
-    model: "gpt-5-mini-transcribe" // ajuste conforme disponibilidade
-  } as any);
+    model: "whisper-1", 
+  });
   return resp.text || "";
 }
 
-// Analisa imagem: retorna uma breve descrição (CORRIGIDO)
+// Analisa imagem: retorna uma breve descrição (CORRIGIDO TS2769)
 export async function analyzeImage(filePath: string) {
   // 1. Ler o arquivo e codificar em Base64
   const imageBase64 = fs.readFileSync(filePath, { encoding: 'base64' });
 
   const resp = await client.chat.completions.create({
-    model: "gpt-4o", // Modelo que suporta visão (recomendado)
+    model: "gpt-4o", // Modelo que suporta visão
     messages: [
       {
         role: "user",
@@ -39,11 +40,11 @@ export async function analyzeImage(filePath: string) {
           {
             type: "image_url",
             image_url: {
-              url: `data:image/jpeg;base64,${imageBase64}`, // Certifique-se de que o tipo MIME é o correto (jpeg, png, etc.)
+              url: `data:image/jpeg;base64,${imageBase64}`, // URL é o campo final
             },
           },
         ],
-      },
+      } as any, // Adicionado 'as any' para forçar a tipagem caso o compilador persista
     ],
     max_tokens: 300,
   });
