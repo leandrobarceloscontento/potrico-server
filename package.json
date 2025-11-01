@@ -23,9 +23,7 @@
     "ts-node": "10.9.1",
     "ts-node-dev": "2.0.0",
     "typescript": "5.1.6",
-    // ADIÇÃO CRUCIAL 1: Tipagens do Express
     "@types/express": "^4.17.21", 
-    // ADIÇÃO CRUCIAL 2: Tipagens do Node
     "@types/node": "^20.12.12"
   }
 }
