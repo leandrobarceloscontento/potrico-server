@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    // SOLUÇÃO FINAL: Removendo o 'cd' problemático. Usando a sintaxe mais simples
     "start": "npx prisma migrate deploy && ts-node src/server.ts",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev --name init",
