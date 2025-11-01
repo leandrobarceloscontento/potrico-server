@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "start": "npx prisma migrate deploy && npx ts-node src/server.ts",
+    // SOLUÇÃO FINAL: Mudar para a pasta 'src' antes de rodar o 'server.ts'
+    "start": "npx prisma migrate deploy && cd src && npx ts-node server.ts",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev --name init",
     "seed": "ts-node prisma/seed.ts"
