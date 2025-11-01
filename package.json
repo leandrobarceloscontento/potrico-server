@@ -2,14 +2,15 @@
   "name": "potrico-server",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "build": "tsc",
-    "start": "node dist/server.js",
-    "prisma:generate": "prisma generate",
-    "prisma:migrate": "prisma migrate dev --name init",
-    "seed": "ts-node prisma/seed.ts"
-  },
+ "scripts": {
+  "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+  "build": "npx prisma generate && tsc",
+  "start": "node dist/server.js",
+  "prisma:generate": "prisma generate",
+  "prisma:migrate": "prisma migrate dev --name init",
+  "seed": "ts-node prisma/seed.ts"
+}
+,
   "dependencies": {
     "@prisma/client": "^5.0.0",
     "axios": "^1.5.0",
