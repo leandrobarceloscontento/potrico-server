@@ -1,8 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { handleWebhook } from "./handlers/webhook"; // Caminho OK (se está em src/handlers)
+import { handleWebhook } from "@handlers/webhook"; // Caminho atualizado usando @handlers
 import { PrismaClient } from "@prisma/client";
-import { sendTextToWhatsApp } from "./lib/whatsapp"; // Caminho OK (se está em src/lib)
+import { sendTextToWhatsApp } from "@lib/whatsapp"; // Caminho atualizado usando @lib
 
 const prisma = new PrismaClient();
 const app = express();
@@ -23,7 +23,6 @@ app.post("/admin/send", async (req, res) => {
   const { phone, text } = req.body;
   if (!phone || !text) return res.status(400).json({ error: "phone/text required" });
   
-  // A importação estática está no topo:
   const r = await sendTextToWhatsApp(phone, text);
   res.json(r.data || r);
 });
