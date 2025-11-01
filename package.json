@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc",
-    
-    "start": "npx prisma migrate deploy && npx ts-node src/server.ts", 
+    "start": "npx prisma migrate deploy && npx ts-node src/server.ts",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev --name init",
     "seed": "ts-node prisma/seed.ts"
@@ -24,8 +23,7 @@
     "prisma": "^5.0.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.1.6",
-    // CORREÇÃO: Adiciona dependências de tipos para resolver TS7016.
-    "@types/express": "^4.17.21", 
-    "@types/node": "^20.12.12" 
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.12"
   }
 }
