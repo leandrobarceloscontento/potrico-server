@@ -4,8 +4,9 @@
     "module": "CommonJS",
     "outDir": "dist",
     
-    // CORREÇÃO: Usa a raiz do projeto ('.') para incluir TUDO.
     "rootDir": ".", 
+   
+    "baseUrl": ".", 
     
     "strict": true,
     "esModuleInterop": true,
