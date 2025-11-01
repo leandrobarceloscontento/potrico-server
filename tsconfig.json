@@ -4,7 +4,7 @@
     "module": "CommonJS",
     "outDir": "dist",
     
-    // CORREÇÃO: Usar a raiz do projeto ('.') para incluir TUDO, incluindo o 'seed.ts' e subpastas.
+    // CORREÇÃO: Usa a raiz do projeto ('.') para incluir TUDO.
     "rootDir": ".", 
     
     "strict": true,
